@@ -22,7 +22,7 @@ public class CheckoutInformationPage {
     private WebElement postalCodeInput;
 
     @FindBy(id = "continue")
-    private WebElement continueBtn;
+    public WebElement continueBtn;
 
     @FindBy(xpath = "//button[@class='btn btn_secondary back btn_medium cart_cancel_link']")
     private WebElement cancelBtn;
@@ -34,7 +34,7 @@ public class CheckoutInformationPage {
     }
 
 
-    public CheckoutOverviewPage continueChecking(String firstName, String lastName, int postalCode){
+    public CheckoutOverviewPage continueChecking(String firstName, String lastName, String postalCode){
 
         FluentWait fluentWait = new FluentWait(driver)
                 .withTimeout(Duration.ofSeconds(3));
@@ -43,7 +43,7 @@ public class CheckoutInformationPage {
         lastNameInput.click();
         lastNameInput.sendKeys(lastName);
         postalCodeInput.click();
-        postalCodeInput.sendKeys(String.valueOf(postalCode));
+        postalCodeInput.sendKeys(postalCode);
 
         fluentWait.until(ExpectedConditions.elementToBeClickable(continueBtn));
         continueBtn.click();

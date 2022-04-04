@@ -14,40 +14,42 @@ import java.util.Properties;
 
 public class TestUtil {
     public WebDriver driver;
-    private String url;
+    private String url;// = "https://www.saucedemo.com/";//testing app
     private String browser;
     private int implicitWait;
 
 
-    @BeforeMethod
+    @BeforeMethod//not before test, because inside there is a method
     public void setUp(){
-        setUpBrowserDriver();
+        setupBrowserDriver();
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(){
         driver.quit();
     }
 
-    private void setUpBrowserDriver(){
-        try(FileInputStream configFile =  new FileInputStream("src/test/resources/config.properties")){
+    private void setupBrowserDriver(){
+
+        try (FileInputStream configFile = new FileInputStream("src/test/resources/config.properties")){
             Properties config = new Properties();
             config.load(configFile);
             url = config.getProperty("urlAddress");
             browser = config.getProperty("browser");
             implicitWait = Integer.parseInt(config.getProperty("implicitWait"));
         }catch (IOException e){
-            System.out.println("Cannot read configs!");
+            System.out.println("Cannot read configs");
         }
+
         switch (browser){
-            case"chrome":
+            case "chrome":
                 createChromeDriver(url, implicitWait);
                 break;
             case "firefox":
                 createFirefoxDriver(url, implicitWait);
                 break;
             default:
-                throw new IllegalStateException("Unsupported Browser Type!");
+                throw new IllegalStateException("Unsupported browser type");
         }
     }
 
@@ -61,10 +63,12 @@ public class TestUtil {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
         loadUrl(url);
     }
-    private void createFirefoxDriver(String url, int implicitWait){
+    private void createFirefoxDriver(String url, int implicitWait) {
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
         loadUrl(url);
     }
+
+
 }

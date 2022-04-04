@@ -4,6 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import java.time.Duration;
 
 public class ShoppingCartPage {
     protected WebDriver driver;
@@ -13,7 +17,7 @@ public class ShoppingCartPage {
     private WebElement continueShoppingBtn;
 
     @FindBy(xpath = "//button[@id='checkout']")
-    protected WebElement checkoutBtn;
+    public WebElement checkoutBtn;
 
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
     private WebElement burgerMenuButton;
@@ -30,9 +34,8 @@ public class ShoppingCartPage {
     }
 
     public CheckoutInformationPage checkout(){
-        /*LoginPage loginPage = new LoginPage(driver);
-        ProductsPage productsPage = loginPage.login("standard_user", "secret_sauce");
-        productsPage.addItemToTheCart("bolt-t-shirt");*/
+        FluentWait fluentWait = new FluentWait(driver)
+                .withTimeout(Duration.ofSeconds(3));
 
         if (shoppingCartCounter.getText().isEmpty()) {
             System.out.println("Add items to the shopping cart");
@@ -40,6 +43,7 @@ public class ShoppingCartPage {
             shoppingCartLink.click();
         }
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        fluentWait.until(ExpectedConditions.elementToBeClickable(checkoutBtn));
         shoppingCartPage.checkoutBtn.click();
 
             return new CheckoutInformationPage(driver);

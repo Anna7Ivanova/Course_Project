@@ -21,7 +21,7 @@ public class CheckoutCompletePage {
     private WebElement logoutBtn;
 
     @FindBy(xpath = "//button[@id='back-to-products']")
-    private WebElement backHomeBtn;
+    public WebElement backHomeBtn;
 
     public CheckoutCompletePage(WebDriver driver){
         this.driver = driver;

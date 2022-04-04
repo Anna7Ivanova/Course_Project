@@ -19,7 +19,7 @@ public class LoginPage {
     private WebElement passwordInput;
 
     @FindBy(css = "[value=Login]")
-    private WebElement loginBtn;
+    public WebElement loginBtn;
 
     @FindBy(xpath = "//*[text()='Epic sadface: Username and password do not match any user in this service']")
     private WebElement genericErrorMessage;

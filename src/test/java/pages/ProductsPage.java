@@ -25,7 +25,7 @@ public class ProductsPage {
     private WebElement dropDownSortingOptions;
 
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
-    private WebElement burgerMenuButton;
+    public WebElement burgerMenuButton;
 
 
     public ProductsPage(WebDriver driver) {
@@ -34,8 +34,12 @@ public class ProductsPage {
     }
 
     public void addItemToTheCart(String productName) {
+        FluentWait fluentWait = new FluentWait(driver)
+                .withTimeout(Duration.ofSeconds(3));
+
         String xpathOfElementToBeAdded = String.format(ADD_TO_CART_LOCATOR, productName);
         WebElement addToCartButton = driver.findElement(By.xpath(xpathOfElementToBeAdded));
+        fluentWait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
         addToCartButton.click();
     }
 
@@ -63,9 +67,6 @@ public class ProductsPage {
     }
 
     public ShoppingCartPage checkShoppingCart() {
-        /*LoginPage loginPage = new LoginPage(driver);
-        ProductsPage productsPage = loginPage.login(username,password);
-        productsPage.addItemToTheCart(productName);*/
 
         if (shoppingCartCounter.getText().isEmpty()) {
             System.out.println("Add items to the shopping cart");
