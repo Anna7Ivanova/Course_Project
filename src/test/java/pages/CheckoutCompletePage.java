@@ -30,11 +30,13 @@ public class CheckoutCompletePage {
 
     public void logout(){
 
-        burgerMenuButton.click();
         FluentWait fluentWait = new FluentWait(driver)
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofSeconds(2))
                 .ignoreAll(Collections.singleton(NoSuchElementException.class));
+
+        fluentWait.until(ExpectedConditions.elementToBeClickable(burgerMenuButton));
+        burgerMenuButton.click();
 
         fluentWait.until(ExpectedConditions.elementToBeClickable(logoutBtn));
         logoutBtn.click();

@@ -3,17 +3,17 @@
 <suite thread-count="3" verbose="1" name="Course_Project"
        annotations="JDK" parallel="tests">
 
-    <test name="First Test Suite">
+    <test name="SuccessfulLoginTest">
         <classes>
             <class name="qa.automation.SuccessfulLoginTest"/>
         </classes>
     </test>
-    <test name="JS executor">
+    <test name="UnsuccessfulLoginTest">
         <classes>
             <class name="qa.automation.UnsuccessfulLoginTest"/>
         </classes>
     </test>
-    <test name="Wait Test">
+    <test name="AddProductsTest">
         <classes>
             <class name="qa.automation.AddProductsTest"/>
         </classes>

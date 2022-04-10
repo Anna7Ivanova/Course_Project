@@ -34,14 +34,20 @@ public class CheckoutInformationPage {
     }
 
 
-    public CheckoutOverviewPage continueChecking(String firstName, String lastName, String postalCode){
+    public CheckoutOverviewPage fillInData(String firstName, String lastName, String postalCode){
 
         FluentWait fluentWait = new FluentWait(driver)
                 .withTimeout(Duration.ofSeconds(3));
+
+        fluentWait.until(ExpectedConditions.elementToBeClickable(firstNameInput));
         firstNameInput.click();
         firstNameInput.sendKeys(firstName);
+
+        fluentWait.until(ExpectedConditions.elementToBeClickable(lastNameInput));
         lastNameInput.click();
         lastNameInput.sendKeys(lastName);
+
+        fluentWait.until(ExpectedConditions.elementToBeClickable(postalCodeInput));
         postalCodeInput.click();
         postalCodeInput.sendKeys(postalCode);
 

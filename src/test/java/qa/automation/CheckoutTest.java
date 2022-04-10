@@ -18,7 +18,6 @@ public class CheckoutTest extends TestUtil {
 
         ProductsPage productsPage = loginPage.login("standard_user","secret_sauce");
         productsPage.addItemToTheCart("bike-light");
-
         Assert.assertEquals(productsPage.getItemsInTheCart(), 1, "Because we have only one item so far!");
 
         productsPage.addItemToTheCart("backpack");
@@ -30,9 +29,7 @@ public class CheckoutTest extends TestUtil {
         shoppingCartPage.checkout();
         Assert.assertTrue(checkoutInformationPage.continueBtn.isDisplayed(), "This shall be visible after pressing the checkout button at the shopping cart page!");
 
-        checkoutInformationPage.continueChecking("Anna", "Ivanova", "1696");
-        Assert.assertTrue(checkoutOverviewPage.finishBtn.isDisplayed(), "This shall be visible after pressing the continue button at the checkout information page!");
-
+        checkoutInformationPage.fillInData("Anna", "Ivanova", "1696");Assert.assertTrue(checkoutOverviewPage.finishBtn.isDisplayed(), "This shall be visible after pressing the continue button at the checkout information page!");
         checkoutOverviewPage.finishingPurchase();
         Assert.assertTrue(checkoutCompletePage.backHomeBtn.isDisplayed());
 

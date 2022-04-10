@@ -26,10 +26,10 @@ public class CheckoutOverviewPage {
     public CheckoutCompletePage finishingPurchase(){
         FluentWait fluentWait = new FluentWait(driver)
                 .withTimeout(Duration.ofSeconds(3));
-        CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage(driver);
+        //CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage(driver);
 
         fluentWait.until(ExpectedConditions.elementToBeClickable(finishBtn));
-        checkoutOverviewPage.finishBtn.click();
+        finishBtn.click();
 
         return new CheckoutCompletePage(driver);
     }

@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
+import java.util.Collections;
+import java.util.NoSuchElementException;
 
 public class ShoppingCartPage {
     protected WebDriver driver;
@@ -34,17 +36,21 @@ public class ShoppingCartPage {
     }
 
     public CheckoutInformationPage checkout(){
+
         FluentWait fluentWait = new FluentWait(driver)
-                .withTimeout(Duration.ofSeconds(3));
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoreAll(Collections.singleton(NoSuchElementException.class));
+        ;
 
         if (shoppingCartCounter.getText().isEmpty()) {
             System.out.println("Add items to the shopping cart");
         } else {
             shoppingCartLink.click();
         }
-        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         fluentWait.until(ExpectedConditions.elementToBeClickable(checkoutBtn));
-        shoppingCartPage.checkoutBtn.click();
+        checkoutBtn.click();
 
             return new CheckoutInformationPage(driver);
     }

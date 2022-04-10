@@ -23,6 +23,6 @@ public class UnsuccessfulLoginTest extends TestUtil {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.tryToLogin(username,password);
 
-        Assert.assertTrue(loginPage.isLoginErrorMessageShown(), "You are not logged in.");
+        Assert.assertTrue(loginPage.isLoginErrorMessageShown());
     }
 }

@@ -2,6 +2,8 @@ package qa.automation;
 
 import base.TestUtil;
 import com.opencsv.exceptions.CsvException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,6 +25,11 @@ public class SuccessfulLoginTest extends TestUtil {
 
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = loginPage.login(username, password);
-        Assert.assertTrue(productsPage.burgerMenuButton.isDisplayed(), "This shall be visible after successful login");
+
+        WebElement burgerMenuButton = driver.findElement(By.id("react-burger-menu-btn"));
+        Assert.assertTrue(burgerMenuButton.isDisplayed(), "This shall be visible after successful login");//version 1
+
+        //version 2. What version 1 or 2 is correct?
+        //Assert.assertTrue(productsPage.burgerMenuButton.isDisplayed(), "This shall be visible after successful login");
     }
 }

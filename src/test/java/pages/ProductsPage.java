@@ -25,7 +25,7 @@ public class ProductsPage {
     private WebElement dropDownSortingOptions;
 
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
-    public WebElement burgerMenuButton;
+    private WebElement burgerMenuButton;
 
 
     public ProductsPage(WebDriver driver) {

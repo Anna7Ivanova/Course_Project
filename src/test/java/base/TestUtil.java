@@ -14,12 +14,12 @@ import java.util.Properties;
 
 public class TestUtil {
     public WebDriver driver;
-    private String url;// = "https://www.saucedemo.com/";//testing app
+    private String url;
     private String browser;
     private int implicitWait;
 
 
-    @BeforeMethod//not before test, because inside there is a method
+    @BeforeMethod
     public void setUp(){
         setupBrowserDriver();
     }

@@ -1,6 +1,8 @@
 package qa.automation;
 
 import base.TestUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
@@ -28,14 +30,16 @@ public class ProblemUserTest extends TestUtil {
         shoppingCartPage.checkout();
         Assert.assertTrue(checkoutInformationPage.continueBtn.isDisplayed(), "This shall be visible after pressing the checkout button at the shopping cart page!");
 
-        checkoutInformationPage.continueChecking("Anna", "Ivanova", "1696");
-        Assert.assertTrue(checkoutOverviewPage.finishBtn.isDisplayed(), "This shall be visible after pressing the continue button at the checkout information page!");
+        checkoutInformationPage.fillInData("Anna", "Ivanova", "1696");
+        WebElement errorMessage = driver.findElement(By.xpath("//*[text()='Error: Last Name is required']"));
 
-        checkoutOverviewPage.finishingPurchase();
+        Assert.assertTrue(errorMessage.isDisplayed(), "This shall be visible after unsuccessful filling last name!");
+
+        /*checkoutOverviewPage.finishingPurchase();
         Assert.assertTrue(checkoutCompletePage.backHomeBtn.isDisplayed());
 
         checkoutCompletePage.logout();
-        Assert.assertTrue(loginPage.loginBtn.isDisplayed(), "This shall be visible after successful purchasing!");
+        Assert.assertTrue(loginPage.loginBtn.isDisplayed(), "This shall be visible after successful purchasing!");*/
 
 
     }

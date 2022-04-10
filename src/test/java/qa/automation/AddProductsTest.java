@@ -12,8 +12,8 @@ public class AddProductsTest extends TestUtil {
     public void addProductsToTheCart(){
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = loginPage.login("standard_user","secret_sauce");
-        productsPage.addItemToTheCart("bolt-t-shirt");
 
+        productsPage.addItemToTheCart("bolt-t-shirt");
         Assert.assertEquals(productsPage.getItemsInTheCart(), 1, "Because we have only one item so far!");
 
         productsPage.addItemToTheCart("fleece-jacket");
