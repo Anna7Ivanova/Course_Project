@@ -75,4 +75,9 @@ public class ProductsPage {
         }
         return new ShoppingCartPage(driver);
     }
+
+
+    public boolean burgerMenuButtonDisplayed() {
+        return burgerMenuButton.isDisplayed();
+    }
 }

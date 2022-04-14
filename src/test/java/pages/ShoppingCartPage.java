@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
@@ -41,17 +40,12 @@ public class ShoppingCartPage {
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofSeconds(2))
                 .ignoreAll(Collections.singleton(NoSuchElementException.class));
-        ;
 
         if (shoppingCartCounter.getText().isEmpty()) {
             System.out.println("Add items to the shopping cart");
         } else {
-            shoppingCartLink.click();
+            checkoutBtn.click();
         }
-        //ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
-        fluentWait.until(ExpectedConditions.elementToBeClickable(checkoutBtn));
-        checkoutBtn.click();
-
             return new CheckoutInformationPage(driver);
     }
 }

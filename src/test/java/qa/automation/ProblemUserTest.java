@@ -33,7 +33,7 @@ public class ProblemUserTest extends TestUtil {
         checkoutInformationPage.fillInData("Anna", "Ivanova", "1696");
         WebElement errorMessage = driver.findElement(By.xpath("//*[text()='Error: Last Name is required']"));
 
-        Assert.assertTrue(errorMessage.isDisplayed(), "This shall be visible after unsuccessful filling last name!");
+        Assert.assertTrue(errorMessage.isDisplayed());
 
         /*checkoutOverviewPage.finishingPurchase();
         Assert.assertTrue(checkoutCompletePage.backHomeBtn.isDisplayed());

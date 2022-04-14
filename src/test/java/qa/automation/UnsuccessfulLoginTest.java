@@ -12,12 +12,12 @@ import java.io.IOException;
 
 public class UnsuccessfulLoginTest extends TestUtil {
 
-    @DataProvider(name = "csvUserList")
+    @DataProvider(name = "wrongUsersList")
     public static Object[][] readUsersFromCsvFile() throws IOException, CsvException {
         return CsvHelper.readCsvFile("src/test/resources/wrongUsers.csv");
     }
 
-    @Test(dataProvider = "csvUserList")
+    @Test(dataProvider = "wrongUsersList")
     public void UnsuccessfulLogin(String username, String password){
 
         LoginPage loginPage = new LoginPage(driver);

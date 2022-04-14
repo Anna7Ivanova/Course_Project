@@ -1,14 +1,24 @@
 package qa.automation;
 
 import base.TestUtil;
+import com.opencsv.exceptions.CsvException;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.*;
+import utils.CsvHelper;
+
+import java.io.IOException;
 
 public class CheckoutTest extends TestUtil {
 
-    @Test
-    public void checkoutTest(){
+    @DataProvider(name = "checkoutList")
+    public static Object[][] readUsersFromCsvFile() throws IOException, CsvException {
+        return CsvHelper.readCsvFile("src/test/resources/checkout.csv");
+    }
+
+    @Test(dataProvider = "checkoutList")
+    public void checkoutTest(String username, String password, String product1, String product2, String firstName, String lastName, String postalCode){
         LoginPage loginPage = new LoginPage(driver);
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         CheckoutInformationPage checkoutInformationPage = new CheckoutInformationPage(driver);
@@ -16,11 +26,11 @@ public class CheckoutTest extends TestUtil {
         CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
 
 
-        ProductsPage productsPage = loginPage.login("standard_user","secret_sauce");
-        productsPage.addItemToTheCart("bike-light");
+        ProductsPage productsPage = loginPage.login(username, password);
+        productsPage.addItemToTheCart(product1);
         Assert.assertEquals(productsPage.getItemsInTheCart(), 1, "Because we have only one item so far!");
 
-        productsPage.addItemToTheCart("backpack");
+        productsPage.addItemToTheCart(product2);
         Assert.assertEquals(productsPage.getItemsInTheCart(), 2, "Because we have 2 items!");
 
         productsPage.checkShoppingCart();
@@ -29,7 +39,9 @@ public class CheckoutTest extends TestUtil {
         shoppingCartPage.checkout();
         Assert.assertTrue(checkoutInformationPage.continueBtn.isDisplayed(), "This shall be visible after pressing the checkout button at the shopping cart page!");
 
-        checkoutInformationPage.fillInData("Anna", "Ivanova", "1696");Assert.assertTrue(checkoutOverviewPage.finishBtn.isDisplayed(), "This shall be visible after pressing the continue button at the checkout information page!");
+        checkoutInformationPage.fillInData(firstName, lastName, postalCode);
+        Assert.assertTrue(checkoutOverviewPage.finishBtn.isDisplayed(), "This shall be visible after pressing the continue button at the checkout information page!");
+
         checkoutOverviewPage.finishingPurchase();
         Assert.assertTrue(checkoutCompletePage.backHomeBtn.isDisplayed());
 

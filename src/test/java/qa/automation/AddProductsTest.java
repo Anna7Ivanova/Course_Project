@@ -20,7 +20,6 @@ public class AddProductsTest extends TestUtil {
         Assert.assertEquals(productsPage.getItemsInTheCart(), 2, "Because we have 2 items!");
 
 
-
     }
 
 }
