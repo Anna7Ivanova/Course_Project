@@ -25,7 +25,6 @@ public class CheckoutTest extends TestUtil {
         CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage(driver);
         CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
 
-
         ProductsPage productsPage = loginPage.login(username, password);
         productsPage.addItemToTheCart(product1);
         Assert.assertEquals(productsPage.getItemsInTheCart(), 1, "Because we have only one item so far!");
