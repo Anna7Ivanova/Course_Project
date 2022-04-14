@@ -57,4 +57,8 @@ public class CheckoutInformationPage {
         return new CheckoutOverviewPage(driver);
     }
 
+    public boolean continueButtonShown(){
+        return continueBtn.isDisplayed();
+    }
+
 }

@@ -37,7 +37,7 @@ public class CheckoutTest extends TestUtil {
         Assert.assertTrue(shoppingCartPage.checkoutBtn.isDisplayed());
 
         shoppingCartPage.checkout();
-        Assert.assertTrue(checkoutInformationPage.continueBtn.isDisplayed(), "This shall be visible after pressing the checkout button at the shopping cart page!");
+        Assert.assertTrue(checkoutInformationPage.continueButtonShown());
 
         checkoutInformationPage.fillInData(firstName, lastName, postalCode);
         Assert.assertTrue(checkoutOverviewPage.finishBtn.isDisplayed(), "This shall be visible after pressing the continue button at the checkout information page!");
